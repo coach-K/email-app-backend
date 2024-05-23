@@ -36,7 +36,7 @@ const Message = db.messages;
           return {status: 400, message: "userId cannot be blank"}
       }
 
-      const user = await User.findByPk(userId, {include: ["messages"]});
+      const user = await User.findByPk(userId, {include: {model: Message, as: "messages", include: ["sender"]}});
 
       return {status: 200, message: "Message successfully", data: user}
     } catch (error) {
@@ -50,7 +50,7 @@ const Message = db.messages;
           return {status: 400, message: "messageId cannot be blank"}
       }
       
-      const message = await Message.findByPk(messageId, {include: ["user"]});
+      const message = await Message.findByPk(messageId, {include: ["user", "sender"]});
 
       return {status: 200, message: "Message successfully", data: message}
     } catch (error) {
