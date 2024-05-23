@@ -24,5 +24,9 @@ db.messages.belongsTo(db.users, {
   foreignKey: "userId",
   as: "user",
 });
+db.messages.belongsTo(db.users, {
+  foreignKey: "senderId",
+  as: "sender",
+});
 
 module.exports = db;
